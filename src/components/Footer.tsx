@@ -2,19 +2,16 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 py-8 md:py-12 px-6 md:px-12 text-xs text-gray-500 font-medium flex flex-col sm:flex-row items-center justify-between gap-6 z-10 relative bg-black/50 backdrop-blur-md mt-16">
-      <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
-        <div className="flex items-center gap-2 select-none">
-          <span className="text-white/80 font-semibold tracking-tight">FitAkka</span>
+    <footer className="bg-[#0C0D15] py-8 px-10 text-center">
+      <div className="max-w-[1120px] mx-auto flex flex-col items-center gap-3.5">
+        <div className="text-[18px] font-[900] text-white">Fit<span className="text-purple">Akka</span></div>
+        <div className="flex gap-6 flex-wrap justify-center">
+          <a href="#" className="text-[12px] font-[700] text-[rgba(255,255,255,0.3)] hover:text-white transition-colors">Terms</a>
+          <a href="#" className="text-[12px] font-[700] text-[rgba(255,255,255,0.3)] hover:text-white transition-colors">Privacy</a>
+          <a href="#waitlist" className="text-[12px] font-[700] text-[rgba(255,255,255,0.3)] hover:text-white transition-colors">Join beta</a>
+          <a href="mailto:hello@fitakka.app" className="text-[12px] font-[700] text-[rgba(255,255,255,0.3)] hover:text-white transition-colors">Contact</a>
         </div>
-        <span className="hidden sm:block text-white/10">|</span>
-        <span>&copy; 2025 Accelerate. All rights reserved.</span>
-      </div>
-      
-      <div className="flex gap-6">
-        <a href="#" className="hover:text-white transition-colors">Privacy</a>
-        <a href="#" className="hover:text-white transition-colors">Terms</a>
-        <a href="#" className="hover:text-white transition-colors">Twitter</a>
+        <p className="text-[11px] font-[700] text-[rgba(255,255,255,0.2)]">© 2026 Fitakka — Your dearly fitness habit builder.</p>
       </div>
     </footer>
   );

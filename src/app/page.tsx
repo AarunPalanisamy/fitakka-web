@@ -1,27 +1,26 @@
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
-import FeatureGrid from '@/components/FeatureGrid';
+import ProblemsSection from '@/components/ProblemsSection';
+import HowItWorksSection from '@/components/HowItWorksSection';
+import DemoSection from '@/components/DemoSection';
+import NudgesSection from '@/components/NudgesSection';
+import CardsShowcaseSection from '@/components/CardsShowcaseSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import WaitlistSection from '@/components/WaitlistSection';
 import Footer from '@/components/Footer';
-import ScrollReveal from '@/components/ScrollReveal';
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative bg-brand-bg text-white selection:bg-brand-purple/30">
-      <div className="bg-grid"></div>
-      
+    <main className="min-h-screen relative font-nunito selection:bg-purple/30">
       <Navbar />
-      
       <HeroSection />
-      
-      <ScrollReveal>
-        <FeatureGrid />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <WaitlistSection />
-      </ScrollReveal>
-      
+      <ProblemsSection />
+      <HowItWorksSection />
+      <DemoSection />
+      <NudgesSection />
+      <CardsShowcaseSection />
+      <TestimonialsSection />
+      <WaitlistSection />
       <Footer />
     </main>
   );

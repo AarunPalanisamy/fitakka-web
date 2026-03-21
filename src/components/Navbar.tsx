@@ -2,17 +2,21 @@ import React from 'react';
 
 export default function Navbar() {
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-6 pointer-events-none">
-      <nav className="pointer-events-auto flex items-center justify-between px-5 py-3 bg-black/40 backdrop-blur-xl border border-white/10 rounded-full w-full max-w-4xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all">
-        <div className="flex items-center gap-2 pl-2 select-none cursor-pointer">
-          <span className="text-brand-purple text-lg leading-none">◆</span>
-          <span className="text-white font-semibold text-lg tracking-tight">FitAkka</span>
+    <nav className="fixed top-0 left-0 right-0 z-[200] bg-white/96 backdrop-blur-[24px] border-b border-border">
+      <div className="max-w-[1120px] mx-auto px-10 flex items-center justify-between h-[62px]">
+        <a href="#" className="flex items-center gap-[9px] text-[21px] font-[900] text-ink decoration-none tracking-[-0.5px]">
+          <div className="w-8 h-8 bg-ink rounded-[8px] flex items-center justify-center text-[16px]">🐻</div>
+          Fit<span className="text-purple">Akka</span>
+        </a>
+        <div className="hidden md:flex gap-8">
+          <a href="#demo" className="text-[13px] font-[700] text-ink-50 hover:text-ink transition-colors">Try it live</a>
+          <a href="#how" className="text-[13px] font-[700] text-ink-50 hover:text-ink transition-colors">How it works</a>
+          <a href="#waitlist" className="text-[13px] font-[700] text-ink-50 hover:text-ink transition-colors">Get early access</a>
         </div>
-        
-        <button className="bg-white hover:bg-gray-200 transition-colors duration-300 text-black font-semibold py-2 px-6 rounded-full text-sm">
-          Join Waitlist
-        </button>
-      </nav>
-    </div>
+        <a href="#waitlist" className="bg-ink text-white px-5 py-[9px] rounded-[50px] font-nunito font-[800] text-[13px] hover:opacity-80 transition-opacity">
+          Join waitlist
+        </a>
+      </div>
+    </nav>
   );
 }
