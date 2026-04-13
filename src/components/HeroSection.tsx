@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import InteractivePhoneDemo from './InteractivePhoneDemo';
 
 export default function HeroSection() {
   return (
@@ -17,14 +18,22 @@ export default function HeroSection() {
             builder.
           </h1>
           <p className="text-[18px] text-ink-50 leading-[1.75] font-[600] mb-10 max-w-[500px]">
-            Tell Fitakka what you ate and what you did. In plain language. Fitakka calculates every macro, tracks every calorie, and nudges you at exactly the right moment.
+            Tell Fitakka what you ate and what you did. It calculates every macro, tracks every calorie, and nudges you at the right moment with one clear action. Every single day.
           </p>
           <div className="flex items-center gap-3.5 flex-wrap">
-            <a href="#demo" className="inline-flex items-center gap-2 bg-ink text-white px-[28px] py-[15px] rounded-[50px] font-nunito font-[800] text-[15px] hover:opacity-[0.82] transition-opacity tracking-[-0.2px]">
-              ✦ Try it live
+            <a href="#" className="inline-flex items-center gap-[10px] bg-ink text-white px-[20px] py-[12px] rounded-[14px] hover:opacity-[0.82] transition-opacity hover:-translate-y-0.5 transform duration-200">
+              <svg viewBox="0 0 384 512" width="22" height="22" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.1-44.6-35.9-2.8-74.3 22.7-93.1 22.7-18.9 0-46.2-21-76-21-46.2 0-89.8 29.5-115 72.8-51.4 86.8-11.4 213.7 38.3 286.3 23.3 34.3 52.8 72 89.2 70.8 35.1-1.2 48.7-22.7 91.2-22.7 42.4 0 54.8 22.7 92.1 21.5 38.6-1.2 63.8-35.5 86.2-68.5 26.6-39.2 37.6-77.2 38.8-79.3-1.1-.3-72.3-27.7-72.6-113.2zM228.6 83.6c20.3-24.8 34-59.5 30.2-93.6-28.7 1.3-64.6 20-85.7 45.4-18.1 21.8-34.1 57.3-29.3 90.6 32.1 2.6 65.5-18.2 84.8-42.4z"/></svg>
+              <div className="flex flex-col items-start leading-none">
+                <span className="text-[10px] font-semibold text-white/70 mb-0.5">Download on the</span>
+                <span className="text-[15px] font-[800] tracking-tight">App Store</span>
+              </div>
             </a>
-            <a href="#how" className="inline-flex items-center gap-2 bg-transparent text-ink px-[24px] py-[14px] rounded-[50px] border-[1.5px] border-border font-nunito font-[800] text-[15px] hover:border-ink transition-colors">
-              How it works →
+            <a href="#" className="inline-flex items-center gap-[10px] bg-ink text-white px-[20px] py-[12px] rounded-[14px] hover:opacity-[0.82] transition-opacity hover:-translate-y-0.5 transform duration-200">
+              <svg viewBox="0 0 512 512" width="22" height="22" fill="currentColor"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+              <div className="flex flex-col items-start leading-none">
+                <span className="text-[10px] font-semibold text-white/70 mb-0.5">GET IT ON</span>
+                <span className="text-[15px] font-[800] tracking-tight">Google Play</span>
+              </div>
             </a>
           </div>
           <div className="flex items-center gap-[10px] mt-7">
@@ -40,140 +49,14 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="relative flex justify-center">
-          <div className="w-[340px] bg-ink rounded-[52px] p-[13px] shadow-[0_60px_120px_rgba(33,34,45,0.25),0_20px_40px_rgba(33,34,45,0.1)] shrink-0">
-            <div className="bg-white rounded-[40px] overflow-hidden flex flex-col font-[-apple-system,'SF_Pro_Display',sans-serif]">
-              <div className="flex justify-between items-center px-[18px] pt-3 text-[11px] font-[600] text-ink">
-                <span>12:34</span>
-                <div className="flex gap-1 items-center">
-                  <div className="w-1 h-1 rounded-full bg-ink opacity-50"></div>
-                  <div className="w-1 h-1 rounded-full bg-ink opacity-50"></div>
-                  <div className="w-1 h-1 rounded-full bg-ink opacity-50"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-start px-4 py-2 pb-[10px]">
-                <div>
-                  <div className="text-[11px] color-[#999] font-[400] mb-[1px]">Welcome back</div>
-                  <div className="text-[22px] font-[800] text-ink tracking-[-0.5px]">Priya</div>
-                </div>
-                <div className="w-[34px] h-[34px] rounded-full bg-[#F4F5F9] border border-border flex items-center justify-center text-[14px] mt-[2px]">🔔</div>
-              </div>
-              <div className="grid grid-cols-2 gap-[10px] px-3 pb-[10px]">
-                <div className="bg-[#F0F0F8] rounded-[16px] p-[13px] relative overflow-hidden min-h-[88px] border border-border">
-                  <div className="absolute bottom-0 left-0 right-0 rounded-b-[16px] bg-purple" style={{ height: '60%' }}></div>
-                  <div className="absolute top-[9px] right-[9px] w-[22px] h-[22px] rounded-full bg-[rgba(149,140,232,0.2)] flex items-center justify-center text-[10px] z-[2]">📉</div>
-                  <div className="relative z-[2]">
-                    <div className="text-[10px] font-[700] text-ink mb-1">Intake</div>
-                    <div className="text-[22px] font-[900] text-ink tracking-[-1px] leading-none">1,840</div>
-                    <div className="text-[10px] font-[700] text-ink mt-[3px] opacity-[0.55]">of 2,000 kcal</div>
-                  </div>
-                </div>
-                <div className="bg-[#F0F0F8] rounded-[16px] p-[13px] relative overflow-hidden min-h-[88px] border border-border">
-                  <div className="absolute bottom-0 left-0 right-0 rounded-b-[16px] bg-blue" style={{ height: '18%' }}></div>
-                  <div className="absolute top-[9px] right-[9px] w-[22px] h-[22px] rounded-full bg-[rgba(149,140,232,0.2)] flex items-center justify-center text-[10px] z-[2]">🔥</div>
-                  <div className="relative z-[2]">
-                    <div className="text-[10px] font-[700] text-ink mb-1">Burned</div>
-                    <div className="text-[22px] font-[900] text-ink tracking-[-1px] leading-none">490</div>
-                    <div className="text-[10px] font-[700] text-ink mt-[3px] opacity-[0.55]">kcal today</div>
-                  </div>
-                </div>
-              </div>
-              <div className="px-3 pb-[10px]">
-                <div className="flex justify-between items-center mb-2">
-                  <div className="text-[14px] font-[800] text-ink tracking-[-0.2px]">Today&apos;s Macros</div>
-                  <div className="text-[11px] font-[600] text-purple">View All</div>
-                </div>
-                <div className="bg-[#F9F9FC] rounded-[14px] border border-border p-3">
-                  <div className="mb-[9px]">
-                    <div className="flex justify-between items-center mb-[5px]">
-                      <div className="text-[11px] font-[700] text-ink">Protein</div>
-                      <div className="text-[10px] font-[600] text-[#AAAABC]"><b className="text-ink font-[800]">112g</b> / 152g</div>
-                    </div>
-                    <div className="h-1.5 rounded-[99px] bg-[#EBEBF5] overflow-hidden">
-                      <div className="h-full bg-purple" style={{ width: '74%' }}></div>
-                    </div>
-                  </div>
-                  <div className="mb-[9px]">
-                    <div className="flex justify-between items-center mb-[5px]">
-                      <div className="text-[11px] font-[700] text-ink">Carbs</div>
-                      <div className="text-[10px] font-[600] text-[#AAAABC]"><b className="text-ink font-[800]">246g</b> / 425g</div>
-                    </div>
-                    <div className="h-1.5 rounded-[99px] bg-[#EBEBF5] overflow-hidden">
-                      <div className="h-full bg-blue" style={{ width: '58%' }}></div>
-                    </div>
-                  </div>
-                  <div className="mb-0">
-                    <div className="flex justify-between items-center mb-[5px]">
-                      <div className="text-[11px] font-[700] text-ink">Fat</div>
-                      <div className="text-[10px] font-[600] text-[#AAAABC]"><b className="text-ink font-[800]">70g</b> / 86g</div>
-                    </div>
-                    <div className="h-1.5 rounded-[99px] bg-[#EBEBF5] overflow-hidden">
-                      <div className="h-full bg-blue" style={{ width: '82%' }}></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-[#F9F9FC] rounded-[14px] border border-border p-3 mx-3 mb-[10px]">
-                <div className="flex justify-between items-center mb-[10px]">
-                  <div className="flex items-center gap-[5px] text-[13px] font-[800] text-ink">
-                    <span className="text-purple">✦</span> Log Your Food
-                  </div>
-                  <div className="flex bg-white border border-border rounded-[8px] p-0.5 gap-0.5">
-                    <div className="px-[9px] py-[3px] rounded-[6px] text-[10px] font-[700] bg-purple text-white">Food</div>
-                    <div className="px-[9px] py-[3px] rounded-[6px] text-[10px] font-[700] text-[#999]">Activity</div>
-                  </div>
-                </div>
-                <div className="grid grid-cols-4 gap-[5px] mb-[9px]">
-                  <div className="rounded-[9px] py-[7px] px-0.5 text-center border-[1.5px] border-border bg-white">
-                    <span className="text-[14px] block mb-[2px]">🍳</span><span className="text-[8px] font-[700] text-[#AAAABC]">Breakfast</span>
-                  </div>
-                  <div className="rounded-[9px] py-[7px] px-0.5 text-center border-[1.5px] border-border bg-white">
-                    <span className="text-[14px] block mb-[2px]">🥗</span><span className="text-[8px] font-[700] text-[#AAAABC]">Lunch</span>
-                  </div>
-                  <div className="rounded-[9px] py-[7px] px-0.5 text-center border-[1.5px] border-purple bg-[#F5F3FF]">
-                    <span className="text-[14px] block mb-[2px]">🍽</span><span className="text-[8px] font-[700] text-purple">Dinner</span>
-                  </div>
-                  <div className="rounded-[9px] py-[7px] px-0.5 text-center border-[1.5px] border-border bg-white">
-                    <span className="text-[14px] block mb-[2px]">🍎</span><span className="text-[8px] font-[700] text-[#AAAABC]">Snacks</span>
-                  </div>
-                </div>
-                <div className="flex gap-[5px] items-center">
-                  <input className="flex-1 h-[33px] rounded-[8px] border-[1.5px] border-border bg-white px-[9px] text-[10px] text-ink font-[-apple-system,'SF_Pro_Display',sans-serif]" placeholder="e.g., grilled chicken with rice…" readOnly />
-                  <button className="w-[33px] h-[33px] rounded-[8px] bg-[#F4F5F9] flex items-center justify-center text-[12px] shrink-0 border-none">🎤</button>
-                  <button className="w-[33px] h-[33px] rounded-[8px] bg-white border-2 border-purple text-purple flex items-center justify-center text-[13px] font-[900] shrink-0">➤</button>
-                </div>
-              </div>
-              <div className="bg-white border-t border-border flex justify-around items-center pt-[7px] pb-[14px]">
-                <div className="flex flex-col items-center gap-0.5 flex-1">
-                  <span className="text-[15px] leading-none">🏠</span>
-                  <div className="w-[14px] h-[3px] rounded-[99px] bg-purple mt-[-1px]"></div>
-                  <span className="text-[9px] font-[700] text-purple">Home</span>
-                </div>
-                <div className="flex flex-col items-center gap-0.5 flex-1">
-                  <span className="text-[15px] leading-none opacity-[0.28]">📈</span>
-                  <span className="text-[9px] font-[700] text-[#BBBBCC]">AI</span>
-                </div>
-                <div className="flex flex-col items-center gap-0.5 flex-1">
-                  <span className="text-[15px] leading-none opacity-[0.28]">📊</span>
-                  <span className="text-[9px] font-[700] text-[#BBBBCC]">Stats</span>
-                </div>
-                <div className="flex flex-col items-center gap-0.5 flex-1">
-                  <span className="text-[15px] leading-none opacity-[0.28]">👤</span>
-                  <span className="text-[9px] font-[700] text-[#BBBBCC]">Profile</span>
-                </div>
-                <div className="flex flex-col items-center gap-0.5 flex-1">
-                  <span className="text-[15px] leading-none opacity-[0.28]">🧭</span>
-                  <span className="text-[9px] font-[700] text-[#BBBBCC]">Explore</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="absolute top-[10%] right-[-26px] bg-white rounded-[12px] px-3 py-2 shadow-[0_8px_20px_rgba(33,34,45,0.12)] text-[11px] font-[800] text-ink flex items-center gap-[6px] whitespace-nowrap animate-floatY hidden lg:flex">
+        <div className="relative flex justify-center w-full">
+          <InteractivePhoneDemo />
+          <div className="absolute top-[10%] right-[-26px] bg-white rounded-[12px] px-3 py-2 shadow-[0_8px_20px_rgba(33,34,45,0.12)] text-[11px] font-[800] text-ink flex items-center gap-[6px] whitespace-nowrap animate-floatY hidden xl:flex z-50">
             <div className="w-[7px] h-[7px] rounded-full bg-purple"></div>
             7-day streak
           </div>
-          <div className="absolute bottom-[18%] left-[-30px] bg-white rounded-[12px] px-3 py-2 shadow-[0_8px_20px_rgba(33,34,45,0.12)] text-[11px] font-[800] text-ink flex items-center gap-[6px] whitespace-nowrap animate-floatY [animation-delay:1.6s] hidden lg:flex">
-            <div className="w-[7px] h-[7px] rounded-full bg-[#22C55E"></div>
+          <div className="absolute bottom-[18%] left-[-30px] bg-white rounded-[12px] px-3 py-2 shadow-[0_8px_20px_rgba(33,34,45,0.12)] text-[11px] font-[800] text-ink flex items-center gap-[6px] whitespace-nowrap animate-floatY [animation-delay:1.6s] hidden xl:flex z-50">
+            <div className="w-[7px] h-[7px] rounded-full bg-[#22C55E]"></div>
             Success day ✓
           </div>
         </div>

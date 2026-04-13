@@ -12,7 +12,7 @@ export default function HowItWorksSection() {
         </p>
 
         <ScrollReveal>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-[56px] items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-[56px] items-stretch">
             {/* Step 1 */}
             <div className="bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-[20px] p-[22px] transition-all hover:bg-[rgba(255,255,255,0.07)] hover:border-[rgba(255,255,255,0.14)]">
               <div className="text-[11px] font-[800] tracking-[0.12em] uppercase text-[rgba(255,255,255,0.25)] mb-3.5">Step 01</div>

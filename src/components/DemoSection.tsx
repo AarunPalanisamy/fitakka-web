@@ -1,274 +1,262 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-
-const CHIPS = [
-  "Oatmeal with banana",
-  "2 eggs and toast",
-  "Grilled chicken salad",
-  "30 min jog",
-  "Walked 5km",
-  "45 min gym session",
-  "2 slices of pizza",
-  "Bowl of pasta with chicken"
-];
-
-const TARGETS = { kcal: 2000, prot: 150, carb: 240, fat: 65, fib: 30 };
-
-interface MessageData {
-  message: string;
-  type: string;
-  kcal: number;
-  prot: number;
-  carb: number;
-  fat: number;
-  fib: number;
-  burned: boolean;
-}
-
-interface Message {
-  role: 'bot' | 'u';
-  content: string;
-  data?: MessageData;
-}
+import React, { useState } from 'react';
 
 export default function DemoSection() {
-  const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', content: "Describe any meal or activity the way you'd say it out loud. I'll calculate the nutrition instantly. Try a chip below or type your own." }
-  ]);
+  const [intake, setIntake] = useState(0);
+  const [burned, setBurned] = useState(1485);
+  const [macros, setMacros] = useState({ protein: 0, carbs: 0, fiber: 0, fat: 0 });
+  const [tab, setTab] = useState<'Food' | 'Activity'>('Food');
+  const [meal, setMeal] = useState<'Breakfast' | 'Lunch' | 'Dinner' | 'Snacks'>('Snacks');
   const [input, setInput] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [stats, setStats] = useState({ kcal: 0, prot: 0, carb: 0, fat: 0, fib: 0 });
-  const [lit, setLit] = useState<string | null>(null);
-  
-  const msgsEndRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const isFirstRender = useRef(true);
+  const [portion, setPortion] = useState(1);
+  const [loading, setLoading] = useState(false);
 
-  const scrollToBottom = () => {
-    msgsEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    scrollToBottom();
-  }, [messages, busy]);
-
-  const updateStats = (delta: Partial<typeof stats>) => {
-    setStats(prev => ({
-      kcal: Math.max(0, prev.kcal + (delta.kcal || 0)),
-      prot: Math.max(0, prev.prot + (delta.prot || 0)),
-      carb: Math.max(0, prev.carb + (delta.carb || 0)),
-      fat: Math.max(0, prev.fat + (delta.fat || 0)),
-      fib: Math.max(0, prev.fib + (delta.fib || 0)),
-    }));
-    setLit('all');
-    setTimeout(() => setLit(null), 900);
-  };
-
-  const sendMsg = async (text: string) => {
-    if (!text.trim() || busy) return;
+  const submit = () => {
+    if (!input.trim() || loading) return;
+    setLoading(true);
     
-    const userMsg: Message = { role: 'u', content: text };
-    setMessages(prev => [...prev, userMsg]);
-    setInput('');
-    if (textareaRef.current) textareaRef.current.style.height = 'auto';
-    
-    setBusy(true);
-
-    // Mock AI response logic
     setTimeout(() => {
-      const isActivity = text.toLowerCase().includes('min') || text.toLowerCase().includes('km') || text.toLowerCase().includes('jog') || text.toLowerCase().includes('session');
+      const isActivity = tab === 'Activity' || input.toLowerCase().includes('run') || input.toLowerCase().includes('walk') || input.toLowerCase().includes('workout') || input.toLowerCase().includes('jog');
       
-      let mockData: MessageData;
       if (isActivity) {
-        const kcal = Math.floor(Math.random() * 300) + 100;
-        mockData = {
-          message: `Got it! That activity burned about ${kcal} calories. I've updated your daily burn.`,
-          type: 'Activity',
-          kcal: kcal, prot: 0, carb: 0, fat: 0, fib: 0,
-          burned: true
-        };
+         setBurned(prev => prev + Math.floor((Math.random() * 200 + 100) * portion));
       } else {
-        const kcal = Math.floor(Math.random() * 500) + 200;
-        const prot = Math.floor(Math.random() * 30) + 10;
-        const carb = Math.floor(Math.random() * 40) + 20;
-        const fat = Math.floor(Math.random() * 20) + 5;
-        const fib = Math.floor(Math.random() * 10) + 2;
-        mockData = {
-          message: `That sounds delicious! I've logged it as approximately ${kcal} calories with ${prot}g of protein.`,
-          type: 'Meal',
-          kcal, prot, carb, fat, fib,
-          burned: false
-        };
+         const k = Math.floor((Math.random() * 400 + 200) * portion);
+         const p = Math.floor((Math.random() * 20 + 10) * portion);
+         const c = Math.floor((Math.random() * 40 + 20) * portion);
+         const f = Math.floor((Math.random() * 15 + 5) * portion);
+         const fb = Math.floor((Math.random() * 8 + 2) * portion);
+         
+         setIntake(prev => prev + k);
+         setMacros(prev => ({
+           protein: prev.protein + p,
+           carbs: prev.carbs + c,
+           fat: prev.fat + f,
+           fiber: prev.fiber + fb
+         }));
       }
-
-      const botMsg: Message = { 
-        role: 'bot', 
-        content: mockData.message,
-        data: mockData
-      };
-      
-      setMessages(prev => [...prev, botMsg]);
-      updateStats({
-        kcal: mockData.burned ? -mockData.kcal : mockData.kcal,
-        prot: mockData.prot,
-        carb: mockData.carb,
-        fat: mockData.fat,
-        fib: mockData.fib
-      });
-      setBusy(false);
-    }, 1500);
+      setInput('');
+      setLoading(false);
+    }, 600);
   };
 
   return (
-    <section className="bg-[radial-gradient(ellipse_55%_50%_at_5%_20%,rgba(149,140,232,0.13)_0%,transparent_50%),radial-gradient(ellipse_45%_45%_at_95%_80%,rgba(172,209,253,0.12)_0%,transparent_50%),#fff] py-[100px] px-10" id="demo">
-      <div className="max-w-[1120px] mx-auto">
-        <div className="max-w-[580px]">
-          <span className="text-[11px] font-[800] tracking-[0.14em] uppercase text-purple mb-3.5 block">Try it now — live demo</span>
-          <h2 className="text-[clamp(30px,3.8vw,50px)] font-[900] text-ink leading-[1.06] tracking-[-1.5px]">See it work<br />in real time.</h2>
-          <p className="text-[16px] text-ink-50 font-[600] leading-[1.75] mt-3.5">Type any meal or activity the way you&apos;d say it out loud. Fitakka calculates the nutrition instantly.</p>
+    <section className="bg-[#FAFBFD] py-[100px] px-6 md:px-10 overflow-hidden relative" id="demo">
+      <div className="max-w-[1120px] mx-auto relative z-10 flex flex-col items-center">
+        
+        {/* Section Heading */}
+        <div className="text-center mb-16 max-w-[600px] mx-auto">
+          <span className="text-[11px] font-[800] tracking-[0.14em] uppercase text-[#8B80F9] mb-3.5 block">Interactive Experience</span>
+          <h2 className="text-[clamp(30px,3.8vw,50px)] font-[900] text-ink leading-[1.06] tracking-[-1.5px]">Try the magic yourself.</h2>
+          <p className="text-[15px] text-ink-50 font-[600] leading-[1.65] mt-4">
+            Type anything — exactly as you'd say it out loud. Watch the calibrated AI effortlessly balance your daily intake and burn.
+          </p>
         </div>
 
-        <div className="max-w-[840px] mx-auto mt-[52px] bg-ink rounded-[28px] overflow-hidden shadow-[0_40px_90px_rgba(33,34,45,0.16),0_8px_20px_rgba(33,34,45,0.08)]">
-          <div className="flex items-center justify-between p-[16px_22px] border-b border-[rgba(255,255,255,0.07)]">
-            <div className="flex items-center gap-[10px]">
-              <div className="w-[34px] h-[34px] rounded-full bg-purple flex items-center justify-center text-[16px]">🐻</div>
-              <div>
-                <div className="text-[14px] font-[800] text-white">Fitakka</div>
-                <div className="text-[11px] text-[rgba(255,255,255,0.3)] font-[700]">Your fitness accountability partner</div>
+        {/* Mobile Device Wrapper */}
+        <div className="relative w-full max-w-[400px]">
+          
+          {/* Animated Magical Spark Backgrounds */}
+          <div className="absolute top-1/4 -left-16 w-[200px] h-[200px] bg-[#8B80F9] mix-blend-multiply filter blur-[70px] opacity-40 animate-pulse transition-opacity duration-1000 z-0 rounded-full"></div>
+          <div className="absolute top-3/4 -right-16 w-[200px] h-[200px] bg-[#E2A6FF] mix-blend-multiply filter blur-[70px] opacity-40 animate-pulse transition-opacity duration-1000 [animation-delay:1s] z-0 rounded-full"></div>
+          <div className="absolute inset-[-4px] bg-gradient-to-b from-[#8B80F9] via-[#D3ACEF] to-[#8B80F9] opacity-30 blur-[20px] rounded-[52px] animate-[pulse_3s_ease-in-out_infinite] z-0"></div>
+
+          {/* The Phone Frame */}
+          <div className="relative z-10 bg-[#FAFAFE] rounded-[48px] border-[12px] border-[#18181B] shadow-[0_30px_80px_-15px_rgba(139,128,249,0.25),0_0_0_1px_rgba(255,255,255,0.1)_inset] h-[820px] overflow-hidden flex flex-col scale-[0.95] sm:scale-100 transform origin-top">
+            
+            {/* Standard Mobile Notch */}
+            <div className="absolute top-0 inset-x-0 h-[28px] flex justify-center z-50">
+              <div className="w-[110px] h-full bg-[#18181B] rounded-b-[18px] relative">
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#1A1A1E] border border-white/5 shadow-inner"></div>
               </div>
             </div>
-            <div className="flex items-center gap-[6px]">
-              <div className="w-[7px] h-[7px] bg-[#22C55E] rounded-full animate-blink"></div>
-              <span className="text-[11px] font-[700] text-[rgba(255,255,255,0.3)]">AI active</span>
-            </div>
-          </div>
 
-          <div className="flex border-b border-[rgba(255,255,255,0.06)] overflow-x-auto lg:overflow-x-visible">
-            {[
-              { id: 'kcal', label: 'Calories', color: 'var(--purple)', suffix: '' },
-              { id: 'prot', label: 'Protein', color: '#86EFAC', suffix: 'g' },
-              { id: 'carb', label: 'Carbs', color: 'var(--blue)', suffix: 'g' },
-              { id: 'fat', label: 'Fat', color: '#FCA5A5', suffix: 'g' },
-              { id: 'fib', label: 'Fibre', color: 'var(--border)', suffix: 'g' },
-            ].map(item => (
-              <div key={item.id} className="flex-1 min-w-[80px] p-[12px_8px] text-center border-r border-[rgba(255,255,255,0.05)] last:border-r-0">
-                <div className={`text-[16px] font-[900] text-white transition-colors duration-400 ${lit ? 'text-blue' : ''}`}>
-                  {Math.round(stats[item.id as keyof typeof stats])}{item.suffix}
+            {/* Simulated Status Bar */}
+            <div className="absolute top-0 inset-x-0 h-[44px] px-6 flex justify-between items-center z-40 pointer-events-none">
+              <span className="text-[12px] font-[600] text-ink tracking-tight mt-1">9:41</span>
+              <div className="flex items-center gap-1.5 mt-1">
+                <svg className="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/></svg>
+                <div className="w-5 h-2.5 outline outline-1 outline-ink rounded-sm relative"><div className="absolute left-[1px] top-[1px] bottom-[1px] right-[2px] bg-ink rounded-[1px]"></div></div>
+              </div>
+            </div>
+
+            {/* Scrollable Content Area */}
+            <div className="flex-1 overflow-y-auto px-5 pt-[60px] pb-8 flex flex-col gap-[14px]">
+              
+              {/* Top Row: Intake & Burned */}
+              <div className="grid grid-cols-2 gap-[12px]">
+                {/* Intake */}
+                <div className="bg-[#F3F4F7] rounded-[24px] p-4 relative overflow-hidden h-[130px] flex flex-col justify-end">
+                  <div className="absolute top-4 left-4 z-10">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-black">
+                      <polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline>
+                      <polyline points="16 17 22 17 22 11"></polyline>
+                    </svg>
+                  </div>
+                  <div className="relative z-10 mt-auto">
+                    <div className="text-[12px] font-[800] text-ink mb-[2px] tracking-tight">Intake</div>
+                    <div className="text-[32px] font-[900] text-black leading-[1] tracking-[-1.5px] mb-[2px]">{intake.toLocaleString()}</div>
+                    <div className="text-[11px] font-[700] text-ink-50">of 3,081 kcal</div>
+                  </div>
                 </div>
-                <div className="text-[9px] font-[800] text-[rgba(255,255,255,0.28)] uppercase tracking-[0.07em] mt-0.5">{item.label}</div>
-                <div className="h-[3px] bg-[rgba(255,255,255,0.07)] rounded-[99px] mt-[6px] overflow-hidden">
+
+                {/* Burned */}
+                <div className="bg-[#F3F4F7] rounded-[24px] p-4 relative overflow-hidden h-[130px] flex flex-col justify-end">
                   <div 
-                    className="h-full rounded-[99px] transition-[width] duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]" 
-                    style={{ 
-                      width: `${Math.min(100, (stats[item.id as keyof typeof stats] / TARGETS[item.id as keyof typeof TARGETS]) * 100)}%`,
-                      backgroundColor: item.color
-                    }}
+                    className="absolute left-0 right-0 bottom-0 bg-[#A6A2F8] transition-all duration-1000 ease-out" 
+                    style={{ height: `${Math.max(15, Math.min((burned / 2680) * 100, 100))}%` }}
                   ></div>
+                  <div className="absolute top-4 left-4 z-10">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-black">
+                      <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                  </div>
+                  <div className="relative z-10 mt-auto mix-blend-multiply">
+                    <div className="text-[12px] font-[800] text-ink mb-[2px] tracking-tight">Burned</div>
+                    <div className="text-[32px] font-[900] text-black leading-[1] tracking-[-1.5px] mb-[2px]">{burned.toLocaleString()}</div>
+                    <div className="text-[11px] font-[700] text-[#4F4F55]">of 2,680 kcal</div>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
 
-          <div className="h-[280px] overflow-y-auto p-[18px] flex flex-col gap-[11px] scrollbar-thin scrollbar-thumb-white/10">
-            {messages.map((msg, i) => (
-              <div key={i} className={`flex gap-2 items-end animate-msgIn ${msg.role === 'u' ? 'flex-row-reverse' : ''}`}>
-                <div className={`w-[26px] h-[26px] rounded-full shrink-0 flex items-center justify-center text-[12px] ${msg.role === 'bot' ? 'bg-purple' : 'bg-[rgba(255,255,255,0.1)] text-[10px] text-[rgba(255,255,255,0.4)] font-[800]'}`}>
-                  {msg.role === 'bot' ? '🐻' : 'You'}
+              {/* Logger Card */}
+              <div className="bg-white rounded-[24px] p-4 shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-[#EBECEF]">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-1.5">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px] text-[#8B80F9]">
+                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                    <h3 className="text-[15px] font-[800] text-ink tracking-tight">Log Your Food</h3>
+                  </div>
+                  
+                  <div className="flex items-center bg-[#F3F4F7] p-[3px] rounded-full border border-[#EBECEF]">
+                    <button 
+                      onClick={() => setTab('Food')}
+                      className={`flex items-center gap-[4px] px-[12px] py-[6px] rounded-full text-[10.5px] font-[800] transition-colors shadow-sm ${tab === 'Food' ? 'bg-[#988DFB] text-white' : 'bg-transparent text-ink-50 shadow-none'}`}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+                      Food
+                    </button>
+                    <button 
+                      onClick={() => setTab('Activity')}
+                      className={`flex items-center gap-[4px] px-[12px] py-[6px] rounded-full text-[10.5px] font-[800] transition-colors shadow-sm ${tab === 'Activity' ? 'bg-[#988DFB] text-white' : 'bg-transparent text-ink-50 shadow-none'}`}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                      Activity
+                    </button>
+                  </div>
                 </div>
-                <div className={`max-w-[70%] p-[10px_13px] text-[13px] font-[600] leading-[1.5] ${msg.role === 'u' ? 'bg-purple text-white rounded-[15px_15px_3px_15px]' : 'bg-[rgba(255,255,255,0.07)] text-[rgba(255,255,255,0.8)] rounded-[15px_15px_15px_3px]'}`}>
-                  {msg.content}
-                  {msg.data && (
-                    <div className="grid grid-cols-3 gap-[7px] mt-2 bg-[rgba(149,140,232,0.1)] border border-[rgba(149,140,232,0.22)] rounded-[11px] p-[11px]">
-                      <div className="text-center">
-                        <div className="text-[13px] font-[900] text-white">{msg.data.kcal} kcal</div>
-                        <div className="text-[8px] font-[800] text-[rgba(255,255,255,0.35)] uppercase tracking-[0.04em]">Calories</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-[13px] font-[900] text-white">{msg.data.prot}g</div>
-                        <div className="text-[8px] font-[800] text-[rgba(255,255,255,0.35)] uppercase tracking-[0.04em]">Protein</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-[13px] font-[900] text-white">{msg.data.carb}g</div>
-                        <div className="text-[8px] font-[800] text-[rgba(255,255,255,0.35)] uppercase tracking-[0.04em]">Carbs</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-[13px] font-[900] text-white">{msg.data.fat}g</div>
-                        <div className="text-[8px] font-[800] text-[rgba(255,255,255,0.35)] uppercase tracking-[0.04em]">Fat</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-[13px] font-[900] text-white">{msg.data.fib}g</div>
-                        <div className="text-[8px] font-[800] text-[rgba(255,255,255,0.35)] uppercase tracking-[0.04em]">Fibre</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-[13px] font-[900] text-white">{msg.data.type}</div>
-                        <div className="text-[8px] font-[800] text-[rgba(255,255,255,0.35)] uppercase tracking-[0.04em]">Type</div>
-                      </div>
+
+                {tab === 'Food' && (
+                  <div className="grid grid-cols-4 gap-[8px] mb-4">
+                    {[
+                      { 
+                        id: 'Breakfast', 
+                        icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px] mb-[4px] text-current"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><line x1="6" y1="2" x2="6" y2="4"></line><line x1="10" y1="2" x2="10" y2="4"></line><line x1="14" y1="2" x2="14" y2="4"></line></svg>
+                      },
+                      { 
+                        id: 'Lunch', 
+                        icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px] mb-[4px] text-current"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+                      },
+                      { 
+                        id: 'Dinner', 
+                        icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px] mb-[4px] text-current"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                      },
+                      { 
+                        id: 'Snacks', 
+                        icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px] mb-[4px] text-current"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>
+                      }
+                    ].map(m => (
+                      <button 
+                        key={m.id}
+                        onClick={() => setMeal(m.id as any)}
+                        className={`flex flex-col items-center justify-center py-[10px] rounded-[16px] border transition-colors outline-none focus:outline-none ${meal === m.id ? 'bg-[#988DFB] border-[#988DFB] text-white shadow-[0_4px_12px_rgba(152,141,251,0.25)]' : 'bg-white border-[#EBECEF] text-ink-50 hover:bg-[#F9FAFB]'}`}
+                      >
+                        {m.icon}
+                        <span className="text-[9px] font-[800] tracking-tight">{m.id}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <div className="flex gap-[8px] mb-5">
+                  <input 
+                    type="text" 
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => { if(e.key === 'Enter') submit(); }}
+                    placeholder={tab === 'Food' ? "I had 3 dosa and white chutney" : "e.g. 30 min morning walk"} 
+                    className="flex-1 bg-white border border-[#EBECEF] rounded-[16px] px-[16px] text-[13px] font-[600] text-ink placeholder:text-[#A1A1A5] outline-none focus:border-[#8B80F9] transition-colors"
+                  />
+                  <button className="w-[42px] h-[42px] shrink-0 rounded-[14px] border border-[#EBECEF] flex items-center justify-center text-ink-50 bg-[#F9FAFB] hover:text-[#8B80F9] transition-colors outline-none focus:outline-none">
+                    <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+                    </svg>
+                  </button>
+                  <button 
+                    onClick={submit}
+                    disabled={loading || !input.trim()}
+                    className="w-[42px] h-[42px] shrink-0 rounded-[14px] bg-[#988DFB] text-white flex items-center justify-center hover:bg-[#8B80F9] transition-colors shadow-[0_4px_12px_rgba(152,141,251,0.25)] disabled:opacity-50 disabled:shadow-none outline-none focus:outline-none"
+                  >
+                    {loading ? (
+                      <div className="w-[18px] h-[18px] border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    ) : (
+                      <svg className="w-[20px] h-[20px]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M11.608 2.05a.5.5 0 0 1 .784 0l2.454 3.493a3 3 0 0 0 1.66 1.156l4.136.936a.5.5 0 0 1 .288.825l-2.932 2.92a3 3 0 0 0-.853 1.884l-.38 4.225a.5.5 0 0 1-.876.242l-2.846-3.195a3 3 0 0 0-2.022-.988l-4.225-.262a.5.5 0 0 1-.303-.84l3.16-2.88a3 3 0 0 0 .942-1.84z"/>
+                      </svg>
+                    )}
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-[11px] font-[800] text-ink pr-3">Portion size</div>
+                  <div className="flex gap-[4px] bg-transparent">
+                    {[
+                      { val: 0.5, label: '½ serve', sub: 'Half' },
+                      { val: 1, label: '1 serve', sub: 'Regular' },
+                      { val: 1.5, label: '1½ serve', sub: 'Large' },
+                      { val: 2, label: '2 serves', sub: 'Double' },
+                    ].map(p => (
+                      <button 
+                        key={p.val}
+                        onClick={() => setPortion(p.val)}
+                        className={`px-[10px] py-[6px] rounded-[10px] flex flex-col items-center justify-center transition-colors min-w-[55px] outline-none focus:outline-none ${portion === p.val ? 'bg-[#EEEEF1] text-ink' : 'bg-transparent text-[#B4B4B8] hover:bg-[#F9FAFB] hover:text-[#888]'}`}
+                      >
+                        <span className="text-[9.5px] font-[800] leading-none mb-[3px]">{p.label}</span>
+                        <span className="text-[7px] font-[700] uppercase tracking-[0.05em] opacity-40">{p.sub}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="text-[9.5px] font-[600] text-[#A1A1A5] text-center mt-4 italic">
+                  As you know, clear and detailed inputs generate more accurate results!
+                </div>
+              </div>
+
+              {/* Bottom Macros */}
+              <div className="pb-10">
+                <h3 className="text-[16px] font-[800] text-ink mb-3 tracking-tight">Today's Macros</h3>
+                <div className="grid grid-cols-2 gap-[10px]">
+                  {[
+                    { label: 'Protein', value: macros.protein, target: 152, unit: 'g' },
+                    { label: 'Carbs', value: macros.carbs, target: 425, unit: 'g' },
+                    { label: 'Fiber', value: macros.fiber, target: 40, unit: 'g' },
+                    { label: 'Fat', value: macros.fat, target: 80, unit: 'g' }
+                  ].map((m, i) => (
+                    <div key={m.label} className={`bg-white rounded-[20px] p-[16px] shadow-[0_2px_12px_rgba(0,0,0,0.015)] border border-[#EBECEF]`} style={{ animationDelay: `${i * 0.1}s` }}>
+                      <div className="text-[12px] font-[800] text-ink mb-[2px]">{m.label}</div>
+                      <div className="text-[20px] font-[900] text-black leading-none tracking-[-0.5px] mb-[4px]">{m.value}{m.unit}</div>
+                      <div className="text-[10.5px] font-[700] text-[#A1A1A5]">of {m.target}{m.unit}</div>
                     </div>
-                  )}
+                  ))}
                 </div>
               </div>
-            ))}
-            {busy && (
-              <div className="flex items-center gap-2 p-[0_18px_6px]">
-                <div className="w-[26px] h-[26px] rounded-full bg-purple flex items-center justify-center text-[12px] shrink-0">🐻</div>
-                <div className="flex gap-[3px]">
-                  <span className="w-[5px] h-[5px] bg-[rgba(255,255,255,0.22)] rounded-full animate-td"></span>
-                  <span className="w-[5px] h-[5px] bg-[rgba(255,255,255,0.22)] rounded-full animate-td [animation-delay:0.2s]"></span>
-                  <span className="w-[5px] h-[5px] bg-[rgba(255,255,255,0.22)] rounded-full animate-td [animation-delay:0.4s]"></span>
-                </div>
-                <span className="text-[11px] text-[rgba(255,255,255,0.28)] font-[700]">Calculating...</span>
-              </div>
-            )}
-            <div ref={msgsEndRef} />
-          </div>
 
-          <div className="p-[9px_16px_0] flex gap-[6px] flex-wrap border-t border-[rgba(255,255,255,0.05)]">
-            {CHIPS.map(chip => (
-              <button 
-                key={chip} 
-                onClick={() => sendMsg(chip)}
-                disabled={busy}
-                className="bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] rounded-[50px] px-[11px] py-[5px] font-nunito text-[11px] font-[700] text-[rgba(255,255,255,0.45)] hover:bg-[rgba(149,140,232,0.18)] hover:text-[rgba(255,255,255,0.9)] hover:border-[rgba(149,140,232,0.4)] transition-all whitespace-nowrap cursor-pointer disabled:opacity-50"
-              >
-                {chip}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex gap-[9px] p-[12px_16px] border-t border-[rgba(255,255,255,0.06)]">
-            <textarea 
-              ref={textareaRef}
-              className="flex-1 bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.09)] rounded-[16px] p-[10px_14px] resize-none font-nunito text-[13px] font-[600] text-white outline-none min-h-[42px] max-h-[90px] focus:border-purple transition-colors leading-[1.4]" 
-              placeholder="e.g. had grilled salmon with rice and vegetables for dinner…" 
-              rows={1}
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-                e.target.style.height = 'auto';
-                e.target.style.height = e.target.scrollHeight + 'px';
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  sendMsg(input);
-                }
-              }}
-            />
-            <button 
-              className="w-[42px] h-[42px] rounded-full bg-purple border-none cursor-pointer text-[15px] text-white hover:opacity-[0.85] transition-opacity shrink-0 flex items-center justify-center disabled:bg-[rgba(255,255,255,0.1)] disabled:cursor-not-allowed"
-              disabled={busy || !input.trim()}
-              onClick={() => sendMsg(input)}
-            >
-              ➤
-            </button>
+            </div>
           </div>
         </div>
-        <p className="max-w-[840px] mx-auto mt-3 text-center text-[11px] font-[700] text-[rgba(33,34,45,0.35)]">Powered by Claude AI · Numbers are estimates for demo purposes. The full app uses a calibrated nutrition model.</p>
       </div>
     </section>
   );
