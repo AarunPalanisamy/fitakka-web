@@ -6,7 +6,7 @@ export default function Navbar() {
       <div className="max-w-[1120px] mx-auto px-10 flex items-center justify-between h-[62px]">
         <a href="#" className="flex items-center gap-[9px] text-[21px] font-[900] text-ink decoration-none tracking-[-0.5px]">
           <div className="w-8 h-8 bg-ink rounded-[8px] flex items-center justify-center text-[16px]">🐻</div>
-          Fit<span className="text-purple">Akka</span>
+          FitAkka
         </a>
         <div className="hidden md:flex gap-8">
           <a href="#demo" className="text-[13px] font-[700] text-ink-50 hover:text-ink transition-colors">Try it live</a>

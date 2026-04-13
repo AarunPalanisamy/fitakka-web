@@ -42,14 +42,14 @@ export default function InteractivePhoneDemo() {
   };
 
   return (
-    <div className="relative w-full max-w-[400px]">
+    <div className="relative w-[340px] sm:w-[400px] flex justify-center mx-auto">
       {/* Animated Magical Spark Backgrounds */}
       <div className="absolute top-1/4 -left-16 w-[200px] h-[200px] bg-[#8B80F9] mix-blend-multiply filter blur-[70px] opacity-40 animate-pulse transition-opacity duration-1000 z-0 rounded-full"></div>
       <div className="absolute top-3/4 -right-16 w-[200px] h-[200px] bg-[#E2A6FF] mix-blend-multiply filter blur-[70px] opacity-40 animate-pulse transition-opacity duration-1000 [animation-delay:1s] z-0 rounded-full"></div>
       <div className="absolute inset-[-4px] bg-gradient-to-b from-[#8B80F9] via-[#D3ACEF] to-[#8B80F9] opacity-30 blur-[20px] rounded-[52px] animate-[pulse_3s_ease-in-out_infinite] z-0"></div>
 
       {/* The Phone Frame */}
-      <div className="relative z-10 bg-[#FAFAFE] rounded-[48px] border-[12px] border-[#18181B] shadow-[0_30px_80px_-15px_rgba(139,128,249,0.25),0_0_0_1px_rgba(255,255,255,0.1)_inset] h-[820px] overflow-hidden flex flex-col scale-[0.95] sm:scale-100 transform origin-top">
+      <div className="relative z-10 bg-[#FAFAFE] rounded-[48px] border-[12px] border-[#18181B] shadow-[0_30px_80px_-15px_rgba(139,128,249,0.25),0_0_0_1px_rgba(255,255,255,0.1)_inset] h-[680px] sm:h-[820px] overflow-hidden flex flex-col scale-[0.85] sm:scale-100 transform origin-top">
         
         {/* Standard Mobile Notch */}
         <div className="absolute top-0 inset-x-0 h-[28px] flex justify-center z-50">
@@ -68,7 +68,7 @@ export default function InteractivePhoneDemo() {
         </div>
 
         {/* Scrollable Content Area */}
-        <div className="flex-1 overflow-y-auto px-5 pt-[60px] pb-8 flex flex-col gap-[14px]">
+        <div className="flex-1 overflow-y-auto px-5 pt-[60px] pb-[100px] flex flex-col gap-[14px]">
           
           {/* Top Row: Intake & Burned */}
           <div className="grid grid-cols-2 gap-[12px]">
@@ -241,32 +241,6 @@ export default function InteractivePhoneDemo() {
                 
                 return (
                   <div key={m.label} className={`bg-white rounded-[20px] p-[16px] shadow-[0_2px_12px_rgba(0,0,0,0.015)] border border-[#EBECEF] relative overflow-hidden`} style={{ animationDelay: `${i * 0.1}s` }}>
-                    {/* Wavy Water Fill Background */}
-                    <div 
-                      className="absolute left-0 right-0 bottom-0 w-full z-0 transition-all duration-1000 ease-in-out"
-                      style={{ height: `${percentage}%` }}
-                    >
-                      {/* Back Wave */}
-                      <div 
-                        className="absolute top-[-14px] left-0 w-full h-[15px] opacity-40 animate-[slide-wave_3s_linear_infinite]"
-                        style={{ 
-                          background: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-.2-31.6z' fill='${m.color.replace('#', '%23')}' /%3E%3C/svg%3E") repeat-x`, 
-                          backgroundSize: '200% 100%' 
-                        }}
-                      ></div>
-                      {/* Front Wave */}
-                      <div 
-                        className="absolute top-[-10px] left-0 w-full h-[12px] opacity-60 animate-[slide-wave_2s_linear_infinite]"
-                        style={{ 
-                          background: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-.2-31.6z' fill='${m.color.replace('#', '%23')}' /%3E%3C/svg%3E") repeat-x`, 
-                          backgroundSize: '200% 100%',
-                          backgroundPosition: '50% 0'
-                        }}
-                      ></div>
-                      {/* Body Fill */}
-                      <div className="w-full h-full opacity-30" style={{ backgroundColor: m.color }}></div>
-                    </div>
-
                     <div className="relative z-10 transition-colors duration-500">
                       <div className="text-[12px] font-[800] text-ink mb-[2px]">{m.label}</div>
                       <div className="text-[20px] font-[900] text-black leading-none tracking-[-0.5px] mb-[4px]">{m.value}{m.unit}</div>
@@ -279,7 +253,43 @@ export default function InteractivePhoneDemo() {
           </div>
 
         </div>
+
+        {/* Bottom Navigation */}
+        <div className="absolute bottom-0 inset-x-0 h-[84px] bg-white/80 backdrop-blur-xl border-t border-[#EBECEF]/80 z-40 rounded-b-[36px] flex justify-between items-start px-8 pt-4 pb-6">
+          {[
+            {
+              id: 'Home',
+              icon: <svg className="w-[22px] h-[22px] mb-1.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>,
+              isActive: true,
+            },
+            {
+              id: 'AI',
+              icon: <svg className="w-[22px] h-[22px] mb-1.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>,
+              isActive: false,
+            },
+            {
+              id: 'Stats',
+              icon: <svg className="w-[22px] h-[22px] mb-1.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>,
+              isActive: false,
+            },
+            {
+              id: 'Profile',
+              icon: <svg className="w-[22px] h-[22px] mb-1.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+              isActive: false,
+            }
+          ].map((item) => (
+            <button key={item.id} className={`flex flex-col items-center justify-center outline-none focus:outline-none transition-colors ${item.isActive ? 'text-[#8B80F9]' : 'text-[#A1A1A5] hover:text-[#8B80F9]'}`}>
+              {item.icon}
+              <span className="text-[10px] font-[800] tracking-tight">{item.id}</span>
+            </button>
+          ))}
+          
+          {/* Home Indicator Line */}
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[5px] bg-[#18181B] rounded-full opacity-[0.15]"></div>
+        </div>
+
       </div>
     </div>
   );
 }
+
