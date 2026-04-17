@@ -51,14 +51,14 @@ export default function HeroSection() {
 
         <div className="relative flex justify-center w-full">
           <InteractivePhoneDemo />
-          <div className="absolute top-[10%] right-[-26px] bg-white rounded-[12px] px-3 py-2 shadow-[0_8px_20px_rgba(33,34,45,0.12)] text-[11px] font-[800] text-ink flex items-center gap-[6px] whitespace-nowrap animate-floatY hidden xl:flex z-50">
+          {/* <div className="absolute top-[10%] right-[-26px] bg-white rounded-[12px] px-3 py-2 shadow-[0_8px_20px_rgba(33,34,45,0.12)] text-[11px] font-[800] text-ink flex items-center gap-[6px] whitespace-nowrap animate-floatY hidden xl:flex z-50">
             <div className="w-[7px] h-[7px] rounded-full bg-purple"></div>
             7-day streak
           </div>
           <div className="absolute bottom-[18%] left-[-30px] bg-white rounded-[12px] px-3 py-2 shadow-[0_8px_20px_rgba(33,34,45,0.12)] text-[11px] font-[800] text-ink flex items-center gap-[6px] whitespace-nowrap animate-floatY [animation-delay:1.6s] hidden xl:flex z-50">
             <div className="w-[7px] h-[7px] rounded-full bg-[#22C55E]"></div>
             Success day ✓
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

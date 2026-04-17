@@ -73,9 +73,10 @@ export default function ProblemsSection() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 lg:mb-16 gap-8">
           <div>
             <span className="text-[11px] font-[800] tracking-[0.14em] uppercase text-purple mb-3.5 block">Why people fail at fitness</span>
-            <h2 className="text-[clamp(30px,3.8vw,50px)] font-[900] text-ink leading-[1.06] tracking-[-1.5px] max-w-[420px]">Three real problems.<br />No one talks about them.</h2>
+            <h2 className="text-[clamp(30px,3.8vw,50px)] font-[900] text-ink leading-[1.06] tracking-[-1.5px] max-w-[600px]">Three real problems.<br />No one talks about them.</h2>
+            <p className="text-[14px] font-[700] text-ink-50 max-w-[370px] lg:text-right leading-[1.6]">Fitakka was built specifically to solve each one of these.</p>
+
           </div>
-          <p className="text-[14px] font-[700] text-ink-50 max-w-[280px] lg:text-right leading-[1.6]">Fitakka was built specifically to solve each one of these.</p>
         </div>
         
         <ScrollReveal>

@@ -42,7 +42,7 @@ export default function InteractivePhoneDemo() {
   };
 
   return (
-    <div className="relative w-[340px] sm:w-[400px] flex justify-center mx-auto">
+    <div className="relative w-[400px] flex justify-center mx-auto">
       {/* Animated Magical Spark Backgrounds */}
       <div className="absolute top-1/4 -left-16 w-[200px] h-[200px] bg-[#8B80F9] mix-blend-multiply filter blur-[70px] opacity-40 animate-pulse transition-opacity duration-1000 z-0 rounded-full"></div>
       <div className="absolute top-3/4 -right-16 w-[200px] h-[200px] bg-[#E2A6FF] mix-blend-multiply filter blur-[70px] opacity-40 animate-pulse transition-opacity duration-1000 [animation-delay:1s] z-0 rounded-full"></div>

@@ -56,7 +56,18 @@ export default function DemoSection() {
 
         {/* Mobile Device Wrapper */}
         <div className="relative w-full max-w-[400px]">
-          
+                   {/* <div className="absolute top-[10%] right-[-26px] bg-white rounded-[12px] px-3 py-2 shadow-[0_8px_20px_rgba(33,34,45,0.12)] text-[11px] font-[800] text-ink flex items-center gap-[6px] whitespace-nowrap animate-floatY hidden xl:flex z-50">
+            <div className="w-[7px] h-[7px] rounded-full bg-purple"></div>
+            7-day streak
+          </div> */}
+            <div className="absolute bottom-[48%] left-[-30px] bg-white rounded-[12px] px-3 py-2 shadow-[0_8px_20px_rgba(33,34,45,0.12)] text-[11px] font-[800] text-ink flex items-center gap-[6px] whitespace-nowrap animate-floatY [animation-delay:1.6s] hidden xl:flex z-50">
+            <div className="w-[7px] h-[7px] rounded-full bg-[#22C55E]"></div>
+            Log your Meal and Activity here (Toggle between 'Food' & 'Activity' buttons) 
+          </div>
+          {/* <div className="absolute bottom-[18%] left-[-30px] bg-white rounded-[12px] px-3 py-2 shadow-[0_8px_20px_rgba(33,34,45,0.12)] text-[11px] font-[800] text-ink flex items-center gap-[6px] whitespace-nowrap animate-floatY [animation-delay:1.6s] hidden xl:flex z-50">
+            <div className="w-[7px] h-[7px] rounded-full bg-[#22C55E]"></div>
+            Success day ✓
+          </div> */}
           {/* Animated Magical Spark Backgrounds */}
           <div className="absolute top-1/4 -left-16 w-[200px] h-[200px] bg-[#8B80F9] mix-blend-multiply filter blur-[70px] opacity-40 animate-pulse transition-opacity duration-1000 z-0 rounded-full"></div>
           <div className="absolute top-3/4 -right-16 w-[200px] h-[200px] bg-[#E2A6FF] mix-blend-multiply filter blur-[70px] opacity-40 animate-pulse transition-opacity duration-1000 [animation-delay:1s] z-0 rounded-full"></div>
@@ -257,6 +268,7 @@ export default function DemoSection() {
             </div>
           </div>
         </div>
+        
       </div>
     </section>
   );

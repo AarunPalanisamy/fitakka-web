@@ -3,6 +3,7 @@ import HeroSection from '@/components/HeroSection';
 import ProblemsSection from '@/components/ProblemsSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import NudgesSection from '@/components/NudgesSection';
+import DemoSection from '@/components/DemoSection';
 import CardsShowcaseSection from '@/components/CardsShowcaseSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import WaitlistSection from '@/components/WaitlistSection';
@@ -16,9 +17,11 @@ export default function Home() {
       <ProblemsSection />
       <HowItWorksSection />
       <NudgesSection />
+      <DemoSection />
+      
       <CardsShowcaseSection />
       <TestimonialsSection />
-      <WaitlistSection />
+      {/* <WaitlistSection /> */}
       <Footer />
     </main>
   );
