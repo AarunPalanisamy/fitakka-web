@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ProblemsSection from '@/components/ProblemsSection';
+import GoalsSection from '@/components/GoalsSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import NudgesSection from '@/components/NudgesSection';
 import DemoSection from '@/components/DemoSection';
@@ -15,10 +16,11 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <ProblemsSection />
+      <GoalsSection />
       <HowItWorksSection />
       <NudgesSection />
       <DemoSection />
-      
+
       <CardsShowcaseSection />
       <TestimonialsSection />
       {/* <WaitlistSection /> */}

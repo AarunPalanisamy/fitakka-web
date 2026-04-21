@@ -18,7 +18,7 @@ export default function HeroSection() {
             builder.
           </h1>
           <p className="text-[18px] text-ink-50 leading-[1.75] font-[600] mb-10 max-w-[500px]">
-            Tell Fitakka what you ate and what you did. It calculates every macro, tracks every calorie, and nudges you at the right moment with one clear action. Every single day.
+            Describe what you ate and what you did today - in plain language. Fitakka calculates your calories, protein, carbs, fat and fibre, tracks your physical activity, and tells you every evening whether you're moving closer to your goal or not. Habit science says you need a cue, a routine, and a reward. Fitakka is all three, every single day.
           </p>
           <div className="flex items-center gap-3.5 flex-wrap">
             <a href="#" className="inline-flex items-center gap-[10px] bg-ink text-white px-[20px] py-[12px] rounded-[14px] hover:opacity-[0.82] transition-opacity hover:-translate-y-0.5 transform duration-200">
@@ -44,7 +44,7 @@ export default function HeroSection() {
               <div className="w-[26px] h-[26px] rounded-full bg-purple border-2 border-white flex items-center justify-center text-[10px] font-[800] text-white ml-[-5px]">S</div>
             </div>
             <p className="text-[12px] font-[700] text-ink-50">
-              <strong className="text-ink">400+ people</strong> already on the waitlist
+              <strong className="text-ink">200+ people</strong> already on the waitlist
             </p>
           </div>
         </div>
