@@ -60,7 +60,7 @@ export default function GoalsSection() {
               If you've ever started<br />and stopped —<br />
               <em className="serif-i text-ink">this was built for you.</em>
             </h3>
-            <p className="text-[14px] text-purple font-[600] leading-[1.75] mb-[20px]">
+            <p className="text-[14px] text-white font-[600] leading-[1.75] mb-[20px]">
               Fitakka is for anyone who wants to get fit but finds traditional tracking too complicated, too time-consuming, or too easy to abandon after the first week.
             </p>
           </div>
@@ -72,7 +72,7 @@ export default function GoalsSection() {
               "You struggle to build and maintain the tracking habit — not just for a week, but consistently over months",
               "You want one clear daily signal — success or miss — not a dashboard full of charts you'll never interpret"
             ].map((text, i) => (
-              <div key={i} className="flex items-start gap-[12px] text-[14px] font-[600] text-ink leading-[1.6]">
+              <div key={i} className="flex items-start gap-[12px] text-[14px] font-[600] text-white leading-[1.6]">
                 <div className="w-[22px] h-[22px] rounded-full bg-purple shrink-0 flex items-center justify-center mt-[1px]">
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.2 2.2L8 3" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </div>
