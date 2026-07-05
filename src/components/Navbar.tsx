@@ -5,8 +5,8 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-[200] bg-white/96 backdrop-blur-[24px] border-b border-border">
       <div className="max-w-[1120px] mx-auto px-10 flex items-center justify-between h-[62px]">
         <a href="#" className="flex items-center gap-[9px] text-[21px] font-[900] text-ink decoration-none tracking-[-0.5px]">
-          <div className="rounded-[2px] flex items-center justify-center text-[20px] mt-1">
-            <Image src="/vercel.svg" alt="Fitakka" width={64} height={64} />
+          <div className="rounded-full overflow-hidden flex items-center justify-center">
+            <Image src="/logo.png" alt="Fitakka" width={32} height={32} className="object-contain" />
           </div>
           Fitakka
         </a>

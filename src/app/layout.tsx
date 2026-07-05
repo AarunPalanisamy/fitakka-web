@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: 'Fitakka — Your dearly fitness habit builder',
   description: 'Tell Fitakka what you ate and what you did. It calculates every macro, tracks every calorie, and nudges you at the right moment with one clear action. Every single day.',
   icons: {
-    icon: '/vercel.svg',
+    icon: '/logo.png',
   },
 };
 
