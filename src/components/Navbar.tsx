@@ -6,7 +6,7 @@ export default function Navbar() {
       <div className="max-w-[1120px] mx-auto px-10 flex items-center justify-between h-[62px]">
         <a href="#" className="flex items-center gap-[9px] text-[21px] font-[900] text-ink decoration-none tracking-[-0.5px]">
           <div className="rounded-full overflow-hidden flex items-center justify-center">
-            <Image src="/logo.png" alt="Fitakka" width={32} height={32} className="object-contain" />
+            <Image src="/logo.png" alt="Fitakka" width={42} height={42} className="object-contain" />
           </div>
           Fitakka
         </a>
