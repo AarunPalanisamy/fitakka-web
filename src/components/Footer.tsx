@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flex gap-6 flex-wrap justify-center">
           <a href="/terms" className="text-[12px] font-[700] text-[rgba(255,255,255,0.3)] hover:text-white transition-colors">Terms</a>
           <a href="/privacy" className="text-[12px] font-[700] text-[rgba(255,255,255,0.3)] hover:text-white transition-colors">Privacy</a>
-          {/* <a href="#waitlist" className="text-[12px] font-[700] text-[rgba(255,255,255,0.3)] hover:text-white transition-colors">Join beta</a> */}
+          <a href="https://apps.apple.com/pk/app/fitakka/id6767862812" target="_blank" rel="noopener noreferrer" className="text-[12px] font-[700] text-[rgba(255,255,255,0.3)] hover:text-white transition-colors">Download iOS</a>
           <a href="mailto:hello@fitakka.app" className="text-[12px] font-[700] text-[rgba(255,255,255,0.3)] hover:text-white transition-colors">Contact</a>
         </div>
         <p className="text-[11px] font-[700] text-[rgba(255,255,255,0.2)]">© 2026 Fitakka — Your dearly fitness habit builder.</p>

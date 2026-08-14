@@ -78,6 +78,43 @@ body {
 .animate-td { animation: td 1.2s infinite; }
 .animate-popUp { animation: popUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 
+/* Glow Animations & Classes */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(149, 140, 232, 0.3), 0 0 4px rgba(149, 140, 232, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(149, 140, 232, 0.65), 0 0 8px rgba(149, 140, 232, 0.3);
+  }
+}
+
+@keyframes text-glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 6px rgba(149, 140, 232, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 14px rgba(149, 140, 232, 0.5), 0 0 6px rgba(172, 209, 253, 0.35);
+  }
+}
+
+.glow-btn {
+  box-shadow: 0 4px 14px rgba(149, 140, 232, 0.18);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glow-btn:hover {
+  box-shadow: 0 8px 24px rgba(149, 140, 232, 0.42), 0 0 8px rgba(172, 209, 253, 0.28);
+}
+
+.glow-badge {
+  animation: glow-pulse 3s infinite ease-in-out;
+}
+
+.text-glow {
+  animation: text-glow-pulse 4s infinite ease-in-out;
+}
+
+
 /* Reveal styles */
 .reveal {
   opacity: 0;

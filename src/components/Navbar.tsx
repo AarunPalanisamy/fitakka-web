@@ -13,11 +13,16 @@ export default function Navbar() {
         <div className="hidden md:flex gap-8">
           <a href="#demo" className="text-[13px] font-[700] text-ink-50 hover:text-ink transition-colors">Try it live</a>
           <a href="#how" className="text-[13px] font-[700] text-ink-50 hover:text-ink transition-colors">How it works</a>
-          <a href="#waitlist" className="text-[13px] font-[700] text-ink-50 hover:text-ink transition-colors">Get early access</a>
+          <a href="#download" className="text-[13px] font-[700] text-ink-50 hover:text-ink transition-colors">Download</a>
         </div>
-        {/* <a href="#waitlist" className="bg-ink text-white px-5 py-[9px] rounded-[50px] font-nunito font-[800] text-[13px] hover:opacity-80 transition-opacity">
-          Join waitlist
-        </a> */}
+        <a 
+          href="https://apps.apple.com/pk/app/fitakka/id6767862812" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-ink text-white px-5 py-[9px] rounded-[50px] font-nunito font-[800] text-[13px] transition-all hover:-translate-y-0.5 active:translate-y-0 glow-btn"
+        >
+          Download iOS
+        </a>
       </div>
     </nav>
   );

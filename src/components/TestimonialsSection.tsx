@@ -5,19 +5,19 @@ export default function TestimonialsSection() {
   const testimonials = [
     {
       name: 'Ananya R.',
-      role: 'Software engineer, beta user',
+      role: 'Software engineer',
       text: "I've tried every fitness app out there. They all make me feel like I need a nutrition degree. Fitakka is the first one that actually works the way my brain does.",
       ava: '👩'
     },
     {
       name: 'Karthik M.',
-      role: 'Product manager, beta user',
+      role: 'Product manager',
       text: "The nudges are what got me. Most apps either spam you or go completely quiet. Fitakka messages you once, says something useful, and stops. That's it.",
       ava: '👨'
     },
     {
       name: 'Sneha P.',
-      role: 'Marketing lead, beta user',
+      role: 'Marketing lead',
       text: "I was 11 days into my streak and missed a day. I expected to feel terrible. The streak just disappeared — no notification, no guilt trip. I was back the next day.",
       ava: '👩'
     }
