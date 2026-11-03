@@ -3,8 +3,8 @@ import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 import React from 'react';
 
-// Hosted as a GitHub release asset: the APK exceeds GitHub's 100 MB per-file repo limit.
-const APK_URL = 'https://github.com/AarunPalanisamy/fitakka-web/releases/latest/download/fitakka.apk';
+// Served from Vercel Blob via the rewrite in next.config.ts.
+const APK_URL = '/fitakka.apk';
 
 export const metadata: Metadata = {
   title: 'Download Fitakka for Android (APK)',
